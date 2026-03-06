@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=YouTube Music
+Exec=brave-browser --app=https://music.youtube.com
+Icon=/usr/share/icons/hicolor/256x256/apps/youtube-music.png
+Categories=Audio;Music;

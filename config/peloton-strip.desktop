@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Peloton Stats Strip
+Exec=/usr/bin/python3 -u /usr/local/bin/peloton_strip.py
+Hidden=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=10

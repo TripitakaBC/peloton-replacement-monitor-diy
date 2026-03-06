@@ -1,0 +1,3 @@
+# ANT+ USB Dongle — allow non-root access
+# Dynastream/Garmin ANT+ sticks use vendor ID 0fcf
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0fcf", MODE="0666"

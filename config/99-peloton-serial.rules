@@ -1,0 +1,5 @@
+# Peloton USB RS232 Serial Adapter
+# Creates /dev/peloton_serial symlink
+# Common chips: CP2102 (10c4:ea60), FTDI (0403:6001)
+# Run 'lsusb' to find your adapter's vendor/product ID
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK+="peloton_serial", MODE="0666"
