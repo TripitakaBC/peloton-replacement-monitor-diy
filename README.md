@@ -4,6 +4,8 @@
 
 This guide walks through the complete build process, from hardware assembly to a working system with live stats overlay, ANT+ broadcasting to Garmin watches, Spotify, YouTube Music, Plex, and remote administration.
 
+When my OEM Peloton Bike screen stopped working, I was not willing to pay the >$400USD replacement cost, knowing that it would likely fail again as so many have done. Instead, I set about creating a different solution that unlocked the full potential for a Bike touchscreen using modular and commonly available components. This project comes with a caveat that I am not a developer and most of the code in this project is vibe-coded using Gemini 3.1 Pro and Claude Sonnet 4.6. I would love for this project to be forked and improved by someone who really knew how to make it shine.
+
 ---
 
 ## Table of Contents
