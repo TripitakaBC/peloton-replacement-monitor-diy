@@ -20,9 +20,8 @@ from openant.easy.node import Node
 from openant.easy.channel import Channel
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-
-SCOSCHE_ADDRESS = "D5:1B:B1:5B:E1:B7"
-HR_CHAR_UUID    = "00002a37-0000-1000-8000-00805f9b34fb"
+# HR is received via ANT+ wildcard search (device type 120), so it automatically
+# pairs with any ANT+ heart rate monitor in range. No device-specific address needed.
 
 TASKBAR_H  = 87
 STRIP_H    = 83   # 2px breathing room top and bottom within taskbar band
