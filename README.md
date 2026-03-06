@@ -4,6 +4,8 @@
 
 This guide walks through the complete build process, from hardware assembly to a working system with live stats overlay, ANT+ broadcasting to Garmin watches, Spotify, YouTube Music, Plex, and remote administration.
 
+When my OEM Peloton Bike screen stopped working, I was not willing to pay the >$400USD replacement cost, knowing that it would likely fail again as so many have done. Instead, I set about creating a different solution that unlocked the full potential for a Bike touchscreen using modular and commonly available components. This project comes with a caveat that I am not a developer and most of the code in this project is vibe-coded using Gemini 3.1 Pro and Claude Sonnet 4.6. I would love for this project to be forked and improved by someone who really knew how to make it shine.
+
 ---
 
 ## Table of Contents
@@ -77,7 +79,7 @@ PC (/dev/ttyUSB0 → /dev/peloton_serial via udev symlink)
 |---|---|---|
 | Small-form-factor PC (e.g., Intel NUC) | Main computer | Any x86_64 PC with HDMI and USB. Mounted behind screen |
 | Touchscreen monitor (1080p) | Display | Must have HDMI input and USB touch interface |
-| DSD-Tech USB RS232 to 3.5mm female jack | Bike data connection | See [crossover cable section](#crossover-cable) |
+| DSD-Tech USB RS232 to 3.5mm male jack | Bike data connection | See [crossover cable section](#crossover-cable) |
 | Additional 3.5mm female jack (bare wire) | TX/RX crossover | For the required crossover cable |
 | USB ANT+ dongle | Garmin broadcast + HR receive | e.g., Dynastream/Garmin USB stick |
 | USB Bluetooth dongle | Audio streaming | External BT avoids signal loss from behind screen |
@@ -94,7 +96,7 @@ PC (/dev/ttyUSB0 → /dev/peloton_serial via udev symlink)
 
 | Item | Purpose | Notes |
 |---|---|---|
-| ANT+ HR monitor (e.g., Scosche Rhythm Sync) | Heart rate | Any ANT+ compatible HR monitor works |
+| ANT+ HR monitor (e.g., Scosche Rhythm 24, Garmin chest strap) | Heart rate | Any ANT+ compatible HR monitor works |
 | Garmin watch (or compatible ANT+ receiver) | Ride recording | Receives ANT+ power/cadence/speed data |
 | Bluetooth earbuds | Audio | Connected via the USB BT dongle |
 
@@ -104,7 +106,7 @@ PC (/dev/ttyUSB0 → /dev/peloton_serial via udev symlink)
 
 ### Monitor Mounting
 
-Mount the touchscreen where the original Peloton screen was. The PC mounts to the back of the monitor using a VESA adapter or adhesive mounting.
+Mount the touchscreen where the original Peloton screen was. The PC mounts to the back of the monitor using a VESA adapter or adhesive mounting. You will need to browse Amazon to see what works for you because the original Peloton frame>VESA bracket will not accept the thin-client holders which site between the mount and the screen. I created my own bracket because it was easier for me to do that; you may need to adapt differently.
 
 Connect:
 - HDMI cable from PC to monitor
@@ -112,7 +114,7 @@ Connect:
 
 ### Power Routing
 
-1. **PC:** Run a DC extension cable from the base of the bike up inside the frame, following the existing cable path. Connect to the PC's power input.
+1. **PC:** Run a DC extension cable from the base of the bike up inside the frame, following the existing cable path. Connect to the PC's power input. Most min-PCs are 19v and will not run off the Peloton 12v supply. The extension cable allows you to mount the PC power supply at floor level, away from the bike.
 2. **Monitor:** The existing Peloton power supply feeds the touchscreen. You may need a short extension lead depending on your mounting position.
 
 ### Crossover Cable
@@ -134,12 +136,12 @@ Wire the additional 3.5mm female jack as follows:
 Plug the Peloton's 3.5mm output into your female jack, and the DSD-Tech male jack plugs into the female jack at the other end.
 
 > [!TIP]
-> Refer to the [PeloMon project](https://github.com/ihaque/pelomon) for detailed hardware schematics of the Peloton serial interface.
+> Refer to the [PeloMon project](https://github.com/ihaque/pelomon) for detailed hardware schematics of the Peloton serial interface. This project was made so much easier because the PeloMon project already figured out the RS232 protocols.
 
 ### USB Device Placement
 
 > [!WARNING]
-> If the PC is mounted behind the screen, the on-board Bluetooth will suffer signal loss when you sit up on the bike (your body blocks the signal). Use a **separate USB Bluetooth dongle** brought to the front of the screen via the USB extension hub.
+> If the PC is mounted behind the screen, the on-board Bluetooth will suffer signal loss when you sit up on the bike (the screen blocks the signal). Use a **separate USB Bluetooth dongle** brought to the front of the screen via the USB extension hub or mount your PC somewhere that is not behind the screen so that you can avoid the additional BT dongle and USB extension.
 
 Place the **ANT+ dongle** and **BT dongle** on the USB extension, routed to the front/top of the monitor. Keep them physically separated (at least a few inches) to avoid 2.4GHz RF interference, which can cause audio artifacts (pops/zips) in BT earbuds.
 
@@ -349,6 +351,7 @@ The stats bar renders as two strips embedded in the GNOME taskbar:
 **Right Strip (Bike):** Power (W), Cadence (RPM), Resistance (0–100%), Current time
 
 The middle third of the taskbar remains clear for GNOME dock icons.
+HR zone is a bit rough and uses hard-coded values in the peloton_strip.py file. Change these to suit you but they apply to all users.
 
 ### Resistance Scaling
 
